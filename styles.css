@@ -966,4 +966,123 @@ select:focus, input:focus {
         font-size: 0.8rem;
     }
 }
+
+/* Base quiz container adjustments */
+.quiz-header {
+    text-align: center;
+    padding: 0.5rem 0;
+}
+
+.question-counter {
+    text-align: center;
+    width: 100%;
+}
+
+.quiz-buttons {
+    position: static; /* Remove fixed positioning */
+    margin-top: auto; /* Push to bottom of flex container */
+    padding: 0.5rem;
+    box-shadow: none;
+}
+
+/* Landscape mode optimizations */
+@media screen and (max-height: 500px) {
+    .quiz-container {
+        width: 200px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Split options into two columns */
+    .options-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* Two column layout */
+        gap: 0.3rem;
+        margin-bottom: 0.5rem;
+    }
+
+    /* Left column: ABCD options */
+    .option:not(.custom-option) {
+        grid-column: 1;
+        padding: 0.4rem;
+        font-size: 0.9rem;
+    }
+
+    /* Right column: Option E and buttons */
+    .custom-option {
+        grid-column: 2;
+        grid-row: 1 / span 2;
+        padding: 0.4rem;
+    }
+
+    .quiz-buttons {
+        grid-column: 2;
+        grid-row: 3 / span 2;
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+        padding: 0.3rem;
+        margin-top: 0;
+    }
+
+    .btn {
+        padding: 0.4rem;
+        font-size: 0.9rem;
+        width: 100%;
+    }
+
+    /* Center question number and timer */
+    .quiz-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.3rem 0;
+        margin-bottom: 0.5rem;
+    }
+
+    .timer {
+        font-size: 1.2rem;
+        flex: 0 0 auto;
+    }
+
+    .question-counter {
+        font-size: 0.9rem;
+        flex: 1;
+        text-align: center;
+    }
+
+    /* Adjust question text */
+    #questionText {
+        text-align: center;
+        font-size: 1rem;
+        margin: 0.5rem 0;
+    }
+
+    /* Adjust option labels */
+    .option-label {
+        font-size: 1.1rem;
+        text-align: center;
+    }
+}
+
+/* Very small height adjustments */
+@media screen and (max-height: 400px) {
+    .quiz-container {
+        padding: 0.5rem;
+    }
+
+    .option {
+        padding: 0.3rem;
+        font-size: 0.8rem;
+    }
+
+    .btn {
+        padding: 0.3rem;
+        font-size: 0.8rem;
+    }
+
+    .quiz-header {
+        padding: 0.2rem 0;
+    }
+}
  
