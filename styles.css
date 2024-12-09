@@ -101,10 +101,16 @@ select:focus, input:focus {
     position: fixed;
     right: 0;
     top: 0;
-    height: calc(100vh - 60px);
+    height: 100vh;
     width: 400px;
+    max-width: 100vw;
+    transition: transform 0.3s ease;
+    background: white;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
     display: flex;
     flex-direction: column;
+    z-index: 102;
     overflow: hidden;
 }
 
@@ -132,8 +138,12 @@ select:focus, input:focus {
 
 .quiz-header {
     flex-shrink: 0;
-    padding: 0.8rem;
     margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #eee;
 }
 
 .timer {
@@ -151,8 +161,9 @@ select:focus, input:focus {
     flex: 1;
     display: flex;
     flex-direction: column;
+    min-height: 0;
     overflow-y: auto;
-    padding: 0.8rem;
+    padding-bottom: 1rem;
 }
 
 .question-container h2 {
@@ -165,7 +176,8 @@ select:focus, input:focus {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    margin: 0.5rem 0;
+    margin-bottom: 0.5rem;
+    overflow-y: auto;
 }
 
 .option {
@@ -178,6 +190,7 @@ select:focus, input:focus {
     align-items: center;
     justify-content: center;
     padding: 0.8rem;
+    min-height: 44px;
 }
 
 .option-content {
@@ -192,7 +205,7 @@ select:focus, input:focus {
 }
 
 .option-label {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     font-weight: bold;
     color: var(--primary-color);
     text-align: center;
@@ -218,10 +231,15 @@ select:focus, input:focus {
 
 .quiz-buttons {
     margin-top: 0.5rem;
+    position: sticky;
+    bottom: 0;
+    background: white;
+    padding: 0.5rem 0;
+    z-index: 103;
 }
 
 .quiz-buttons.check-answers {
-    margin-top: 0.3rem;
+    margin-top: 1rem;
 }
 
 .quiz-buttons .btn {
@@ -236,9 +254,9 @@ select:focus, input:focus {
 }
 
 .option-row {
-    display: flex;
-    gap: 0.5rem;
     margin-bottom: 0.5rem;
+    display: flex;
+    gap: 1rem;
 }
 
 .option-row .option {
@@ -794,121 +812,60 @@ select:focus, input:focus {
     width: 50%;
 }
 
-/* Date picker styles */
-.date-selector {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    margin: 1rem 0;
-    padding: 0.5rem;
-    background: #f8f9fa;
-    border-radius: 8px;
-}
-
-.date-display {
-    font-size: 1.1rem;
-    font-weight: 500;
-    color: var(--text-color);
-    min-width: 120px;
-    text-align: center;
-}
-
-.nav-btn {
-    padding: 0.5rem 1rem;
-    border: none;
-    background: var(--primary-color);
-    color: white;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 0.9rem;
-    transition: all 0.2s ease;
-}
-
-.nav-btn:hover:not(:disabled) {
-    background: var(--secondary-color);
-    transform: translateY(-1px);
-}
-
-.nav-btn:disabled {
-    background: #e0e0e0;
-    cursor: not-allowed;
-    opacity: 0.7;
-}
-
-/* Weekly date selector specific styles */
-#weeklyStats .date-selector {
-    margin-bottom: 1.5rem;
-}
-
-#weeklyStats .nav-btn {
-    white-space: nowrap;
-}
-
-/* Make question text and options more compact */
-#questionText {
-    margin: 0.5rem 0;
-    font-size: 1.2rem;
-}
-
-.option {
-    padding: 0.8rem;
-}
-
-.option-label {
-    font-size: 1.2rem;
-}
-
-.quiz-buttons {
-    margin-top: 0.5rem;
-}
-
-.quiz-buttons.check-answers {
-    margin-top: 0.3rem;
-}
-
-/* Responsive adjustments */
-@media screen and (max-height: 700px) {
-    .quiz-header {
-        padding: 0.5rem;
-        margin-bottom: 0.3rem;
-    }
-    
-    .question-container {
-        padding: 0.5rem;
-    }
-    
-    .option {
-        padding: 0.6rem;
-    }
-    
-    .option-label {
-        font-size: 1rem;
-    }
-    
-    .quiz-buttons {
-        margin-top: 0.3rem;
-    }
-    
-    .btn {
+/* Add media query for landscape mode */
+@media screen and (max-height: 500px) {
+    .quiz-container {
         padding: 0.8rem;
     }
+
+    .quiz-header {
+        margin-bottom: 0.3rem;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .option {
+        padding: 0.5rem;
+    }
+
+    .btn {
+        padding: 0.7rem;
+    }
+
+    .question-container {
+        gap: 0.3rem;
+    }
+
+    .options-container {
+        gap: 0.3rem;
+    }
+
+    /* Optional: Make options display in a grid for landscape */
+    .options-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        align-items: start;
+    }
 }
 
-/* Date picker responsive styles */
-@media screen and (max-width: 768px) {
-    .date-selector {
-        flex-wrap: wrap;
+/* Add media query for very small heights */
+@media screen and (max-height: 400px) {
+    .quiz-header {
+        position: sticky;
+        top: 0;
+        background: white;
+        z-index: 103;
     }
-    
-    .nav-btn {
-        padding: 0.4rem 0.8rem;
-        font-size: 0.8rem;
+
+    .quiz-buttons {
+        padding: 0.3rem 0;
     }
-    
-    .date-display {
-        font-size: 1rem;
-        min-width: 100px;
+
+    .btn {
+        padding: 0.5rem;
     }
 }
  
